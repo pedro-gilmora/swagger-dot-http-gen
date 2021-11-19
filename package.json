@@ -19,6 +19,7 @@
 	],
 	"files": [
 		"index.js",
+		"engine.js",
 		"utils"
 	],
 	"scripts": {

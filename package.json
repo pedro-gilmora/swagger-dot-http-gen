@@ -1,0 +1,40 @@
+{
+	"name": "dot-http-swagger-gen",
+	"description": "Create DotHttp client from JSON swagger files",
+	"version": "0.0.2",
+	"license": "UNLICENSED",
+	"type": "module",
+	"bin": {
+		"dot-http-swagger-gen": "index.js",
+		"dotswgen": "index.js"
+	},
+	"author": {
+		"name": "Pedro Gil Mora",
+		"email": "pedro.gilmora@outlook.es",
+		"url": "https://github.com/pedro-gilmora"
+	},
+	"keywords": [
+		"dot-http-swagger",
+		"Pedro Gil Mora"
+	],
+	"files": [
+		"index.js",
+		"utils"
+	],
+	"scripts": {
+		"format": "prettier --write \"./**/*.{js,json}\""
+	},
+	"dependencies": {
+		"chalk": "^4.1.2",
+		"cli-alerts": "^1.2.2",
+		"cli-handle-error": "^4.4.0",
+		"cli-handle-unhandled": "^1.1.1",
+		"cli-meow-help": "^2.0.2",
+		"cli-welcome": "^2.2.2",
+		"meow": "^9.0.0",
+		"node-fetch": "^3.1.0"
+	},
+	"devDependencies": {
+		"prettier": "^2.4.1"
+	}
+}

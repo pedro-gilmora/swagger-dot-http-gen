@@ -1,19 +1,17 @@
 import welcome from 'cli-welcome';
 import unhandled from 'cli-handle-unhandled';
-import fs from 'fs';
-import path from 'path';
+import pkg from '../info.cjs';
 
-const {description: _description, version: _version} = JSON.parse(
-	fs.readFileSync(
-		path.join(__dirname, 'package.json')))
+// const {version, description} = pgk ?? {};
 
+console.log(pkg)
 export default ({ clear = true }) => {
 	unhandled();
 	welcome({
 		title: `dot-http-swagger`,
 		tagLine: `by Pedro Gil Mora`,
-		description: _description,
-		version: _version,
+		description: `${pkg.description}`,
+		version: `${pkg.version}`,
 		bgColor: '#36BB09',
 		color: '#000000',
 		bold: true,

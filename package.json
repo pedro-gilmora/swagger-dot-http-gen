@@ -1,7 +1,7 @@
 {
 	"name": "dot-http-swagger-gen",
 	"description": "Create DotHttp client from JSON swagger files",
-	"version": "0.0.4",
+	"version": "0.0.6",
 	"license": "UNLICENSED",
 	"type": "module",
 	"bin": {

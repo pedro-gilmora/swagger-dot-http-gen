@@ -1,8 +1,11 @@
 import welcome from 'cli-welcome';
 import unhandled from 'cli-handle-unhandled';
 import fs from 'fs';
+import path from 'path';
 
-const {description: _description, version: _version} = JSON.parse(fs.readFileSync('./package.json'))
+const {description: _description, version: _version} = JSON.parse(
+	fs.readFileSync(
+		path.join(__dirname, 'package.json')))
 
 export default ({ clear = true }) => {
 	unhandled();

@@ -38,13 +38,14 @@ function getResultType(schema, fallbackType = 'void') {
       .map(([key, desc]) => `${key}: ${getResultType(desc)}`)
       .join(', ') + '}'
 
-  return { integer: 'number' }[schema?.type] ?? schema?.type ?? fallbackType;
+  return { integer: 'number' }[schema?.type] ?? schema?.type ?? (schema ? 'any': fallbackType);
 }
 
 function getResponseOk(responses) {
   let firstOk = Object.keys(responses ?? {}).find(code => code[0] === '2')
-  if (firstOk)
-    return responses?.[firstOk]?.schema
+  if (firstOk){
+    return responses?.[firstOk]?.content?.["application/json"]?.schema ?? responses?.[firstOk]?.schema
+  }
   return undefined
 }
 
@@ -219,12 +220,12 @@ function findPathParam(
 
 function getTypes(definitions) {
   return (
-    Object.entries(definitions).map(([typeName, descriptor]) => {
+    Object.entries(definitions ?? {}).map(([typeName, descriptor]) => {
       typeName = typeName.split('+').pop();
       return `
 export class ${typeName} {
-  ${Object.entries(descriptor.properties).map(([prop, desc]) => {
-        return `${camelCase(prop)}: ${{ integer: 'number' }[desc.type] ??
+  ${Object.entries(descriptor.properties ?? {}).map(([prop, desc]) => {
+        return `${camelCase(prop)}${desc.nullable ? '?' : ''}: ${{ integer: 'number' }[desc.type] ??
           getResultType(desc) ??
           desc.type ??
           'string'
@@ -277,6 +278,6 @@ export type ${name} = ` +
       )
       .toString() +
     `
-${getTypes(e.definitions)};
+${getTypes(e.definitions ?? e.components?.schemas)};
 `;
 };
